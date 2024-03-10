@@ -1,47 +1,79 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 
 <head>
-    <title>Loving timer</title>
     <meta charset="utf-8">
-    <script type="text/javascript" src="static/jquery.min.js"></script>
-    <script type="text/javascript" src="static/TimeCircles.js"></script>
-    <link rel="stylesheet" href="static/bootstrap.min.css">
-    <link rel="stylesheet" href="static/TimeCircles.css" />
-    <link rel="icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>恋爱计时器</title>
     <style>
         body {
             -webkit-font-smoothing: antialiased;
             font-family: Helvetica Neue, Helvetica, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
-            background-color: #fffceb;
+            background-image: url('bg.jpg');
+            font-size: 85%;
+            margin: 0;
         }
-
-        .container {
-            width: 800px;
-            height: 340px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            margin-left: -400px;
-            margin-top: -170px;
-        }
-
+        
         h2 {
+            font-size: 220%;
+            font-weight: 400;
+        }
+        
+        .content {
+            position: absolute;
+            width: 100%;
+            top: 40%;
+            transform: translate(0, -50%);
             text-align: center;
+        }
+        
+        .timer {
+            font-size: 180%;
+            line-height: 1.5;
+            margin: 1em 0;
+        }
+        
+        .timer b {
+            color: rgb(253, 99, 125);
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="content">
-            <h2><font color="#7CFC00">...徐江西</font>爱自己，爱生活，两年进阿里巴巴</h2>
-            <h2>TIME UNTIL 2020-06-27 CHERISH EVERY DAY</h2>
-            <div id="DateCountdown" data-date="2020-06-27 00:00:00"></div>
+    <div class="content">
+        <h2>刘贤怡，我们已经在一起了</h2>
+        <div class="timer">
+            <b id="d"></b> Days <b id="h"></b> Hours <b id="m"></b> Minutes <b id="s"></b> Seconds
         </div>
     </div>
+
     <script>
-        $("#DateCountdown").TimeCircles();
+        function timer() {
+            var start = new Date(2024, 03, 08); // 2018.6.09
+            var t = new Date() - start;
+            var h = ~~(t / 1000 / 60 / 60 % 24);
+            if (h < 10) {
+                h = "0" + h;
+            }
+            var m = ~~(t / 1000 / 60 % 60);
+            if (m < 10) {
+                m = "0" + m;
+            }
+
+            var s = ~~(t / 1000 % 60);
+            if (s < 10) {
+                s = "0" + s;
+            }
+            document.getElementById('d').innerHTML = ~~(t / 1000 / 60 / 60 / 24);
+            document.getElementById('h').innerHTML = h;
+            document.getElementById('m').innerHTML = m;
+            document.getElementById('s').innerHTML = s;
+        }
+        timer();
+        setInterval(timer, 1000);
     </script>
 </body>
 
